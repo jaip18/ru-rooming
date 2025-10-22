@@ -1,63 +1,145 @@
-import Image from "next/image";
+'use client';
+
+import { useUser } from '@auth0/nextjs-auth0/client';
+import Link from 'next/link';
+import { HomeIcon, Users, MapPin, Star } from 'lucide-react';
 
 export default function Home() {
+  const { user, isLoading } = useUser();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-indigo-100">
+      {/* Navigation */}
+      <nav className="flex justify-between items-center p-6">
+        <div className="flex items-center space-x-2">
+          <HomeIcon className="h-8 w-8 text-red-600" />
+          <span className="text-2xl font-bold text-gray-800">RU Rooming</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {user ? (
+          <Link
+            href="/dashboard"
+            className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Go to Dashboard
+          </Link>
+        ) : (
+          <div className="flex space-x-4">
+            <Link
+              href="/login"
+              className="bg-white text-red-600 px-6 py-2 rounded-full hover:bg-gray-50 transition-colors border-2 border-red-600"
+            >
+              Login
+            </Link>
+            <Link
+              href="/api/auth/login"
+              className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors"
+            >
+              Get Started
+            </Link>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <main className="container mx-auto px-6 py-20">
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+            Find Your Perfect
+            <span className="text-red-600"> Roommate</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Swipe your way to the ideal living situation. Match with compatible roommates 
+            based on lifestyle, budget, and preferences.
+          </p>
+          
+          {!user && (
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/login"
+                className="inline-block bg-white text-red-600 text-lg px-8 py-4 rounded-full hover:bg-gray-50 transition-colors shadow-lg border-2 border-red-600"
+              >
+                Login
+              </Link>
+              <Link
+                href="/api/auth/login"
+                className="inline-block bg-red-600 text-white text-lg px-8 py-4 rounded-full hover:bg-red-700 transition-colors shadow-lg"
+              >
+                Start Matching Now
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* Features */}
+        <div className="grid md:grid-cols-3 gap-8 mt-20">
+          <div className="text-center p-6 bg-white rounded-xl shadow-lg">
+            <Users className="h-12 w-12 text-red-600 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-black mb-2">Smart Matching</h3>
+            <p className="text-gray-600">
+              Our algorithm matches you with compatible roommates based on lifestyle, 
+              habits, and preferences.
+            </p>
+          </div>
+          
+          <div className="text-center p-6 bg-white rounded-xl shadow-lg">
+            <MapPin className="h-12 w-12 text-red-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-black mb-2">Location-Based</h3>
+            <p className="text-gray-600">
+              Find roommates in your preferred neighborhoods with easy commute options.
+            </p>
+          </div>
+          
+          <div className="text-center p-6 bg-white rounded-xl shadow-lg">
+            <Star className="h-12 w-12 text-red-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-black mb-2">Verified Profiles</h3>
+            <p className="text-gray-600">
+              All profiles are verified to ensure a safe and trustworthy experience.
+            </p>
+          </div>
+        </div>
+
+        {/* How it Works */}
+        <div className="mt-20 text-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-12">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center">
+              <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mb-4">
+                1
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Create Profile</h3>
+              <p className="text-gray-600">
+                Tell us about your lifestyle, budget, and what you're looking for in a roommate.
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mb-4">
+                2
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Swipe & Match</h3>
+              <p className="text-gray-600">
+                Swipe through potential roommates and get matched with compatible people.
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mb-4">
+                3
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Connect & Meet</h3>
+              <p className="text-gray-600">
+                Chat with your matches and arrange to meet in person to finalize your living situation.
+              </p>
+            </div>
+          </div>
         </div>
       </main>
     </div>

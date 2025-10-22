@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RU Rooming - Roommate Matching App
+
+A Tinder-like app for finding compatible roommates, built with Next.js, Auth0, and modern web technologies.
+
+## Features
+
+- 🔐 **Secure Authentication** - Auth0 integration for user management
+- 💫 **Swipe Interface** - Tinder-like experience for roommate discovery
+- 🎯 **Smart Matching** - Algorithm-based compatibility scoring
+- 📱 **Responsive Design** - Mobile-first design with Tailwind CSS
+- 🏠 **Profile Management** - Comprehensive roommate profiles
+- 💬 **Match System** - View and manage your matches
+
+## Tech Stack
+
+- **Frontend**: Next.js 16, React 19, TypeScript
+- **Styling**: Tailwind CSS v4
+- **Authentication**: Auth0
+- **Icons**: Lucide React
+- **Deployment**: Vercel (planned)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+- Auth0 account (free tier)
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd RURooming/ru-rooming
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up Auth0:
+   - Create a new Auth0 application
+   - Configure allowed callback URLs: `http://localhost:3000/api/auth/callback`
+   - Configure allowed logout URLs: `http://localhost:3000`
+   - Copy your Auth0 credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Create environment variables:
+```bash
+cp .env.local.example .env.local
+```
 
-## Learn More
+5. Update `.env.local` with your Auth0 credentials:
+```
+AUTH0_SECRET=your-auth0-secret-here
+AUTH0_BASE_URL=http://localhost:3000
+AUTH0_ISSUER_BASE_URL=https://your-domain.auth0.com
+AUTH0_CLIENT_ID=your-auth0-client-id
+AUTH0_CLIENT_SECRET=your-auth0-client-secret
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. Run the development server:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+7. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+src/
+├── app/                    # Next.js app router pages
+│   ├── api/auth/          # Auth0 API routes
+│   ├── dashboard/         # Main swipe interface
+│   ├── matches/           # View matches
+│   ├── profile/           # Profile management
+│   └── layout.tsx         # Root layout
+├── components/            # Reusable components
+├── lib/                   # Utilities and configurations
+└── types/                 # TypeScript type definitions
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features Overview
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Landing Page
+- Beautiful hero section with app introduction
+- Feature highlights and how-it-works section
+- Auth0 login integration
+
+### Dashboard (Swipe Interface)
+- Tinder-like card interface
+- Profile cards with compatibility scores
+- Swipe actions (like/pass)
+- Mock data for demonstration
+
+### Matches Page
+- View all your matches
+- Match compatibility scores
+- Quick actions (message, view profile)
+
+### Profile Management
+- Edit personal information
+- Set preferences (budget, lifestyle, interests)
+- Location and move-in date settings
+- Interactive preference selection
+
+## Future Enhancements
+
+- [ ] Backend integration with Weaviate vector database
+- [ ] Real-time messaging system
+- [ ] Advanced matching algorithms
+- [ ] Image upload functionality
+- [ ] Location-based filtering
+- [ ] Push notifications
+- [ ] Mobile app (React Native)
+
+## Deployment
+
+The app is designed to be deployed on Vercel:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add your environment variables in Vercel dashboard
+4. Deploy!
+
+## Contributing
+
+This is a personal project for portfolio purposes. Feel free to fork and modify for your own use.
+
+## License
+
+MIT License - feel free to use this project for learning and portfolio purposes.
