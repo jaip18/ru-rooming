@@ -1,5 +1,7 @@
 # RU Rooming - Roommate Matching App
 
+Stop Swiping Blindly! Trading your peace for a random roommate is a gamble. Tired of the housemate horror stories? RU Rooming uses smart AI to find your genuinely compatible match, not just a warm body for the lease.
+
 A Tinder-like app for finding compatible roommates, built with Next.js, Auth0, and modern web technologies.
 
 ## Features
@@ -14,6 +16,7 @@ A Tinder-like app for finding compatible roommates, built with Next.js, Auth0, a
 ## Tech Stack
 
 - **Frontend**: Next.js 16, React 19, TypeScript
+- **Backend**: PostgreSQL, Weavinate, AWS services
 - **Styling**: Tailwind CSS v4
 - **Authentication**: Auth0
 - **Icons**: Lucide React
@@ -108,7 +111,6 @@ src/
 
 ## Future Enhancements
 
-- [ ] Backend integration with Weaviate vector database
 - [ ] Real-time messaging system
 - [ ] Advanced matching algorithms
 - [ ] Image upload functionality

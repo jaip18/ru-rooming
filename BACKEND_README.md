@@ -33,11 +33,11 @@ cd /Users/jaipatel/status/RURooming/ru-rooming
 npm install
 ```
 
-### 2. Weaviate Setup
+### 2. Weaviate Setup & AWS Bedrock Setup
 
 #### Option A: Weaviate Cloud (Recommended)
 1. Sign up at [Weaviate Cloud](https://console.weaviate.cloud/)
-2. Create a new cluster
+2. Configure the cluster to use an AWS Bedrock embedding model (or an alternative, like OpenAI) for vectorization.
 3. Get your cluster URL and API key
 4. Add to `.env.local`:
 ```bash
@@ -45,6 +45,8 @@ WEAVIATE_URL=your-cluster-url
 WEAVIATE_API_KEY=your-api-key
 OPENAI_API_KEY=your-openai-key
 ```
+
+5. (Optional) AWS Credentials: If your Weaviate instance is running in a location that requires direct AWS authentication to access Bedrock models, you will need to configure your AWS Access Key ID and Secret Access Key.
 
 #### Option B: Local Weaviate
 1. Install Docker
